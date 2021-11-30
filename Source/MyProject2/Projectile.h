@@ -8,6 +8,18 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Projectile.generated.h"
 
+//USTRUCT()
+//struct FStats {
+//	GENERATED_BODY()
+//
+//	UPROPERTY(BlueprintReadWrite)
+//	float baseDamage;
+//	/*int slowPercent;
+//	float slowDuration;
+//	int peircePercent;
+//	int critChancePercent;
+//	int critDamagePercent;*/
+//};
 
 UCLASS()
 class MYPROJECT2_API AProjectile : public AActor
@@ -46,6 +58,16 @@ public:
 	// Function that initializes the projectile's velocity in the shoot direction.
 	void FireInDirection(const FVector& ShootDirection);
 
-	UPROPERTY(BlueprintReadWrite);
-	float damage;
+	UPROPERTY(BlueprintReadWrite)
+	float baseDamage;
+	//FStats stats;
+		//float baseDamage;
+		//int slowPercent;
+		//float slowDuration;
+		//int peircePercent;
+		//int critChancePercent;
+		//int critDamagePercent;	
+
+	UFUNCTION()
+	void InitStats(float damage);
 };

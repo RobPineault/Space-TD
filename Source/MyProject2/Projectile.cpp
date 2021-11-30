@@ -7,7 +7,13 @@ AProjectile::AProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	damage = 20;
+	baseDamage = 0;
+	/*slowPercent = 0;
+	slowDuration = 0;
+	peircePercent = 0;
+	critChancePercent = 0;
+	critDamagePercent = 0;*/
+	//stats;
 	if (!RootComponent)
 	{
 		RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSceneComponent"));
@@ -41,12 +47,12 @@ AProjectile::AProjectile()
 	if (!ProjectileMeshComponent)
 	{
 		ProjectileMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMeshComponent"));
-		static ConstructorHelpers::FObjectFinder<UStaticMesh>Mesh(TEXT("/Game/Sphere.Sphere"));
+		static ConstructorHelpers::FObjectFinder<UStaticMesh>Mesh(TEXT("/Game/Shape_Sphere.Shape_Sphere"));
 		if (Mesh.Succeeded())
 		{
 			ProjectileMeshComponent->SetStaticMesh(Mesh.Object);
 		}
-		static ConstructorHelpers::FObjectFinder<UMaterial>Material(TEXT("/Game/SphereMaterial.SphereMaterial"));
+		static ConstructorHelpers::FObjectFinder<UMaterial>Material(TEXT("/Game/materials/SphereMaterial.SphereMaterial"));
 		if (Material.Succeeded())
 		{
 			ProjectileMaterialInstance = UMaterialInstanceDynamic::Create(Material.Object, ProjectileMeshComponent);
@@ -93,3 +99,20 @@ void AProjectile::FireInDirection(const FVector& ShootDirection)
 {
 	ProjectileMovementComponent->Velocity = ShootDirection * ProjectileMovementComponent->InitialSpeed;
 }
+
+void AProjectile::InitStats(float damage)
+{
+	baseDamage = damage;
+	//stats.baseDamage = s.baseDamage;
+	//stats.slowPercent = s.slowPercent;
+	//stats.slowDuration = s.slowDuration;
+	//stats.peircePercent = s.pe;
+	//stats.critChancePercent = 0;
+	//stats.critDamagePercent = 0;
+}
+//float damage,
+//int b,
+//float slowDuration,
+//int peircePercent,
+//int critChancePercent,
+//int critDamagePercent
